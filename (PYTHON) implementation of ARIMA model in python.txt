@@ -1,0 +1,51 @@
+# USE DATA SET 
+
+
+
+# Step 1: Import Libraries
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.tsa.arima.model import ARIMA
+
+# Step 2: Load Dataset
+data = pd.read_csv('sales_data.csv')
+
+# Convert Date column to datetime
+data['Date'] = pd.to_datetime(data['Date'])
+
+# Set Date as index (important for time series)
+data.set_index('Date', inplace=True)
+
+# Use 'Sales' as time series
+series = data['Sales']
+
+# Step 3: Visualize Data
+plt.plot(series)
+plt.title("Sales Time Series")
+plt.xlabel("Date")
+plt.ylabel("Sales")
+plt.show()
+
+# Step 4: Build ARIMA Model (p, d, q)
+model = ARIMA(series, order=(1, 1, 1))
+model_fit = model.fit()
+
+# Step 5: Summary of Model
+print(model_fit.summary())
+
+# Step 6: Forecast Future Values (next 5 days)
+forecast = model_fit.forecast(steps=5)
+
+print("\nForecasted Sales Values:")
+print(forecast)
+
+# Step 7: Plot Forecast
+plt.plot(series, label='Original Data')
+plt.plot(forecast.index, forecast, color='red', label='Forecast')
+plt.title("Sales Forecast using ARIMA")
+plt.xlabel("Date")
+plt.ylabel("Sales")
+plt.legend()
+plt.show()

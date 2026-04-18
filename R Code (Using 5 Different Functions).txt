@@ -1,0 +1,51 @@
+#USE DATA SET 
+
+
+
+# Step 1: Load Dataset (Function: read.csv)
+data <- read.csv("sales_data.csv")
+
+# Convert Date column to Date format
+data$Date <- as.Date(data$Date)
+
+# Display first rows (Function: head)
+print(head(data))
+
+# -------------------------------
+# 1. Summary Statistics (Function: summary)
+# -------------------------------
+summary(data)
+
+# -------------------------------
+# 2. Mean of Sales (Function: mean)
+# -------------------------------
+avg_sales <- mean(data$Sales)
+print(paste("Average Sales:", avg_sales))
+
+# -------------------------------
+# 3. Aggregate Sales by Region (Function: aggregate)
+# -------------------------------
+region_sales <- aggregate(Sales ~ Region, data = data, sum)
+print("Total Sales by Region:")
+print(region_sales)
+
+# -------------------------------
+# 4. Correlation (Function: cor)
+# -------------------------------
+correlation <- cor(data$Sales, data$Profit)
+print(paste("Correlation between Sales and Profit:", correlation))
+
+# -------------------------------
+# 5. Plot Sales Trend (Function: plot)
+# -------------------------------
+plot(data$Date, data$Sales, type="o", col="blue",
+     main="Sales Trend Over Time",
+     xlab="Date",
+     ylab="Sales")
+
+# -------------------------------
+# Extra: Boxplot (Function: boxplot)
+# -------------------------------
+boxplot(Sales ~ Region, data=data,
+        main="Sales Distribution by Region",
+        col="lightgreen")

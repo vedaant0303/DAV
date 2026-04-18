@@ -1,0 +1,33 @@
+# practical 3--> Time seres analysis
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = pd.read_excel("time_series_dataset.xlsx")
+
+# Convert Date column to datetime
+df["Date"] = pd.to_datetime(df["Date"])
+
+# Set Date as index
+df.set_index("Date", inplace=True)
+
+# Display data
+print(df.head())
+
+# Plot time series
+plt.plot(df.index, df["Sales"])
+plt.xlabel("Date")
+plt.ylabel("Sales")
+plt.title("Time Series Analysis")
+plt.grid()
+plt.show()
+
+# Moving Average (trend)
+df["MA"] = df["Sales"].rolling(window=3).mean()
+
+# Plot with moving average
+plt.plot(df.index, df["Sales"], label="Original")
+plt.plot(df.index, df["MA"], label="Moving Avg")
+plt.legend()
+plt.show()

@@ -1,0 +1,45 @@
+Practical 2--> implement python program for multiple linear regression 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Input
+n = int(input("Number of students: "))
+marks = []
+att = []
+perf = []
+
+for i in range(n):
+    print(f"\nStudent {i+1}")
+    marks.append(float(input("Marks: ")))
+    att.append(float(input("Attendance: ")))
+    perf.append(float(input("Performance: ")))
+
+# Convert to arrays
+X = np.array([marks, att]).T
+Y = np.array(perf)
+
+# Add intercept
+X = np.c_[np.ones(n), X]
+
+# Calculate coefficients
+beta = np.linalg.inv(X.T @ X) @ X.T @ Y
+
+print(f"\nEquation: y = {beta[0]:.2f} + {beta[1]:.2f}*marks + {beta[2]:.2f}*attendance")
+
+# Prediction
+m = float(input("\nEnter marks: "))
+a = float(input("Enter attendance: "))
+y_pred = beta[0] + beta[1]*m + beta[2]*a
+
+print(f"Predicted Performance = {y_pred:.2f}%")
+
+# Graph
+plt.scatter(marks, perf)
+x_line = np.linspace(min(marks), max(marks), 100)
+y_line = beta[0] + beta[1]*x_line + beta[2]*np.mean(att)
+
+plt.plot(x_line, y_line)
+plt.xlabel("Marks")
+plt.ylabel("Performance")
+plt.show()

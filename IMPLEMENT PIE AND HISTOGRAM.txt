@@ -1,0 +1,38 @@
+# Step 1: Import Library
+import matplotlib.pyplot as plt
+
+# -------------------------------
+# Step 2: User-defined Data
+# -------------------------------
+subjects = ['Math', 'Science', 'English', 'Computer']
+marks = [85, 90, 75, 95]
+
+# -------------------------------
+# Pie Chart
+# -------------------------------
+plt.figure()
+
+plt.pie(marks,
+        labels=subjects,
+        autopct='%1.1f%%',
+        startangle=90)
+
+plt.title("Pie Chart of Marks Distribution")
+
+plt.show()
+
+# -------------------------------
+# Histogram
+# -------------------------------
+# Example: marks of multiple students
+student_marks = [85, 90, 75, 95, 88, 76, 92, 89, 84, 91, 73, 80]
+
+plt.figure()
+
+plt.hist(student_marks, bins=5)
+
+plt.title("Histogram of Student Marks")
+plt.xlabel("Marks")
+plt.ylabel("Frequency")
+
+plt.show()

@@ -1,0 +1,55 @@
+# Install packages (run once)
+install.packages("ggplot2")
+install.packages("lattice")
+install.packages("plotly")
+install.packages("highcharter")
+install.packages("corrplot")
+
+# Load libraries
+library(ggplot2)
+library(lattice)
+library(plotly)
+library(highcharter)
+library(corrplot)
+
+# Use built-in dataset
+data(mtcars)
+
+# -------------------------------
+# 1. ggplot2
+# -------------------------------
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue") +
+  ggtitle("ggplot2: Scatter Plot")
+
+# -------------------------------
+# 2. lattice
+# -------------------------------
+xyplot(mpg ~ wt, data = mtcars,
+       main = "Lattice: Scatter Plot",
+       col = "red")
+
+# -------------------------------
+# 3. plotly (Interactive)
+# -------------------------------
+plot_ly(data = mtcars,
+        x = ~wt, y = ~mpg,
+        type = 'scatter',
+        mode = 'markers') %>%
+  layout(title = "Plotly: Interactive Scatter Plot")
+
+# -------------------------------
+# 4. highcharter (Interactive)
+# -------------------------------
+highchart() %>%
+  hc_add_series(mtcars, type = "scatter",
+                hcaes(x = wt, y = mpg)) %>%
+  hc_title(text = "Highcharter: Scatter Plot")
+
+# -------------------------------
+# 5. corrplot (Correlation Matrix)
+# -------------------------------
+corr_matrix <- cor(mtcars)
+corrplot(corr_matrix,
+         method = "circle",
+         title = "Correlation Plot")

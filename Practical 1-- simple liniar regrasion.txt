@@ -1,0 +1,28 @@
+Practical 1:--Implement python program for simple linear regresion
+
+import matplotlib.pyplot as plt
+
+# Input
+n = int(input("Number of points: "))
+x = [float(input(f"x{i+1}: ")) for i in range(n)]
+y = [float(input(f"y{i+1}: ")) for i in range(n)]
+
+# Calculate m and b
+x_avg = sum(x) / n
+y_avg = sum(y) / n
+
+m = sum((x[i]-x_avg)*(y[i]-y_avg) for i in range(n)) / sum((x[i]-x_avg)**2 for i in range(n))
+b = y_avg - m * x_avg
+
+print(f"Equation: y = {m:.2f}x + {b:.2f}")
+
+# Prediction
+x_new = float(input("Enter x to predict: "))
+y_new = m * x_new + b
+print(f"Predicted y = {y_new:.2f}")
+
+# Plot
+plt.scatter(x, y)
+plt.plot([min(x), max(x)], [m*min(x)+b, m*max(x)+b])
+plt.scatter(x_new, y_new)
+plt.show()

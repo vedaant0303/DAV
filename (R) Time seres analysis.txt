@@ -1,0 +1,34 @@
+# Load required libraries
+library(readxl)
+library(ggplot2)
+library(zoo)
+
+# Load dataset
+df <- read_excel("time_series_dataset.xlsx")
+
+# Convert Date column to Date format
+df$Date <- as.Date(df$Date)
+
+# Display first few rows
+head(df)
+
+# Plot time series
+ggplot(df, aes(x = Date, y = Sales)) +
+  geom_line(color = "blue") +
+  labs(title = "Time Series Analysis",
+       x = "Date",
+       y = "Sales") +
+  theme_minimal()
+
+# Moving Average (trend)
+df$MA <- rollmean(df$Sales, k = 3, fill = NA, align = "right")
+
+# Plot with moving average
+ggplot(df, aes(x = Date)) +
+  geom_line(aes(y = Sales, color = "Original")) +
+  geom_line(aes(y = MA, color = "Moving Avg")) +
+  labs(title = "Time Series with Moving Average",
+       x = "Date",
+       y = "Sales",
+       color = "Legend") +
+  theme_minimal()

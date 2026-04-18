@@ -1,0 +1,50 @@
+#USE DATA SET
+
+
+
+
+# Step 1: Load Dataset
+data <- read.csv("sales_data.csv")
+
+# View data
+print(data)
+
+# -------------------------------
+# Missing Values Check
+# -------------------------------
+# Count missing values
+colSums(is.na(data))
+
+# Visualization of missing values
+install.packages("VIM")   # Run once
+library(VIM)
+
+aggr(data,
+     col=c('navyblue','red'),
+     numbers=TRUE,
+     sortVars=TRUE,
+     labels=names(data),
+     cex.axis=.7,
+     gap=3,
+     ylab=c("Missing Data","Pattern"))
+
+# -------------------------------
+# Outlier Detection (Boxplot)
+# -------------------------------
+boxplot(data$Sales,
+        main="Boxplot for Sales (Outliers)",
+        col="lightblue")
+
+boxplot(data$Profit,
+        main="Boxplot for Profit (Outliers)",
+        col="lightgreen")
+
+# -------------------------------
+# Scatter Plot
+# -------------------------------
+plot(data$Sales, data$Profit,
+     main="Scatter Plot (Outliers Detection)",
+     xlab="Sales",
+     ylab="Profit",
+     col="blue",
+     pch=19)
