@@ -3,7 +3,7 @@
 
 
 # Step 1: Load Dataset (Function: read.csv)
-data <- read.csv("sales_data.csv")
+data <- read.csv(file.choose())
 
 # Convert Date column to Date format
 data$Date <- as.Date(data$Date)
