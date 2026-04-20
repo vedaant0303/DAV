@@ -1,38 +1,12 @@
-# Step 1: Import Library
-import matplotlib.pyplot as plt
+library(ggplot2)
 
-# -------------------------------
-# Step 2: User-defined Data
-# -------------------------------
-subjects = ['Math', 'Science', 'English', 'Computer']
-marks = [85, 90, 75, 95]
+subjects <- c("Math", "Science", "English", "Computer")
+marks <- c(85, 90, 75, 95)
 
-# -------------------------------
-# Pie Chart
-# -------------------------------
-plt.figure()
+pie(marks, labels = subjects, main = "Pie Chart")
 
-plt.pie(marks,
-        labels=subjects,
-        autopct='%1.1f%%',
-        startangle=90)
+student_marks <- c(85, 90, 75, 95, 88, 76, 92, 89, 84, 91, 73, 80)
 
-plt.title("Pie Chart of Marks Distribution")
+hist(student_marks, main="Histogram", xlab="Marks", col="blue")
 
-plt.show()
-
-# -------------------------------
-# Histogram
-# -------------------------------
-# Example: marks of multiple students
-student_marks = [85, 90, 75, 95, 88, 76, 92, 89, 84, 91, 73, 80]
-
-plt.figure()
-
-plt.hist(student_marks, bins=5)
-
-plt.title("Histogram of Student Marks")
-plt.xlabel("Marks")
-plt.ylabel("Frequency")
-
-plt.show()
+implement pie and histogram
