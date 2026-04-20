@@ -4,7 +4,7 @@ library(ggplot2)
 library(zoo)
 
 # Load dataset
-df <- read_excel("time_series_dataset.xlsx")
+df <- read.csv(file.choose())
 
 # Convert Date column to Date format
 df$Date <- as.Date(df$Date)
